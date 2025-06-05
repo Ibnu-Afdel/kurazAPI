@@ -1,3 +1,3 @@
 # kurazAPI
 
-# Backend project for KurazTech Internship exam
+## Backend project for KurazTech Internship exam
