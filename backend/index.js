@@ -13,9 +13,14 @@ app.get("/api/tasks", (req, res) => {
 app.post("/api/tasks", (req, res) => {
   const { caption } = req.body;
 
+  if (!caption) {
+    return res.status(400).json({ error: "caption is required" });
+  }
+
   const newTask = {
     id: defId++,
     caption,
+    completed: false,
   };
 
   tasks.push(newTask);
