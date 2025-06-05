@@ -31,3 +31,14 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`the server is running on port ${PORT}`);
 });
+
+app.put("/api/tasks/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const task = tasks.find((task) => task.id === id);
+
+  if (!task) {
+    return res.status(400).json({ error: "Task doesnt exist" });
+  }
+  task.completed = true;
+  res.json(task);
+});
