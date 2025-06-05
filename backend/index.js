@@ -27,11 +27,6 @@ app.post("/api/tasks", (req, res) => {
   res.status(201).json(newTask);
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`the server is running on port ${PORT}`);
-});
-
 app.put("/api/tasks/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const task = tasks.find((task) => task.id === id);
@@ -41,4 +36,21 @@ app.put("/api/tasks/:id", (req, res) => {
   }
   task.completed = true;
   res.json(task);
+});
+
+app.delete("/api/tasks/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const taskToBeDeleted = tasks.find((task) => task.id === id);
+
+  if (!taskToBeDeleted) {
+    return res.status(404).json({ error: "Task doesnt exist" });
+  }
+  const newTasks = tasks.filter((task) => task.id !== id);
+  tasks = newTasks;
+  res.json(tasks);
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`the server is running on port ${PORT}`);
 });
