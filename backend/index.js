@@ -50,6 +50,10 @@ app.delete("/api/tasks/:id", (req, res) => {
   res.json(tasks);
 });
 
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`the server is running on port ${PORT}`);
